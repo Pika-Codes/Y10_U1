@@ -1,0 +1,47 @@
+.valueItem
+{
+    background-color: #008000;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    margin: 10px;
+}
+
+#itemWrapper
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+#heading
+{
+    text-align: center;
+}
+
+#subHeading
+{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#reset
+{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#resetButton
+{
+    background-color: #0000ff;
+    width: 100px;
+    height: 50px;
+    border: none;
+    box-shadow: none;
+    margin: 10px;
+    color: #ffffff;
+}
