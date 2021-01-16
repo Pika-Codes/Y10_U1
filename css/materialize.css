@@ -2824,17 +2824,17 @@ video.responsive-video {
 }
 
 .parallax-D {
-  background-image: url();
+  background-image: url(3man.jpeg);
   height: 570px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 100%;
+  max-width: 100%;
 }
 
 .parallax-R {
-  background-image: url();
+  background-image: url(6man.jpg);
   height: 570px;
   background-attachment: fixed;
   background-position: center;
