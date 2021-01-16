@@ -9,6 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"/>
 
     </head>
 
@@ -32,17 +33,27 @@
             </div>
         </nav>
 
+        <div class="parallax"></div>
+
         <h1>Home Page</h1>
+        <h1>sadgsagsgsadgsadgasgasdgasdgsadg</h1>
+        <h1>asasgasdgsadgasgasdgadgsagsadgasdg</h1>
+        <h1>dsfdfgsagdfgsagsdagsdagsdag</h1>
+        <h1>hsadgsafgsagsgsadgsdagsadgsa</h1>
 
     </body>
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type = "text/javascript">
 
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
             console.log("Got here");
             $(".dropdown-trigger").dropdown();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.parallax');
+            var instances = M.Parallax.init(elems, 0);
         });
         
     </script>
