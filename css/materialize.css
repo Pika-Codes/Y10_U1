@@ -2813,8 +2813,58 @@ video.responsive-video {
   color: #fff;
 }
 
-.parallax {
+.parallax-M {
   background-image: url(welcome.jpg);
+  height: 570px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 100%;
+}
+
+.parallax-DV {
+  background-image: url();
+  height: 570px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 100%;
+}
+
+.parallax-DU {
+  background-image: url();
+  height: 570px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 100%;
+}
+
+.parallax-RV {
+  background-image: url();
+  height: 570px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 100%;
+}
+
+.parallax-RU {
+  background-image: url();
+  height: 570px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 100%;
+}
+
+.parallax-API {
+  background-image: url();
   height: 570px;
   background-attachment: fixed;
   background-position: center;
