@@ -35,11 +35,20 @@
 
         <div class="parallax-A"></div>
 
-        <h1>Home Page</h1>
-        <h1>sadgsagsgsadgsadgasgasdgasdgsadg</h1>
-        <h1>asasgasdgsadgasgasdgadgsagsadgasdg</h1>
-        <h1>dsfdfgsagdfgsagsdagsdagsdag</h1>
-        <h1>hsadgsafgsagsgsadgsdagsadgsa</h1>
+        <h1>API Page</h1>
+
+        <label for="select">Select your platform:</label>
+        <select name="Platform", id="Plat-in">
+            <option value="Select">Select A Platform</option>
+            <option value="Steam">Steam</option>
+            <option value="XBox">XBox</option>
+            <option value="PlayStation">PlayStation</option>
+        </select>
+        <br>
+        <label for="input">Enter Gamertag/PSN:</label>
+        <input id="Name-in">
+
+        <button onclick="getInfo()" class="btn-floating">Submit</button>
 
         <div class="parallax-A"></div>
         
@@ -57,6 +66,32 @@
             var elems = document.querySelectorAll('.parallax');
             var instances = M.Parallax.init(elems, 0);
         });
+
+        var APIkey = "05e3ca94078a4f90a6ced1a0bca23812";
+        var OauthURL = "https://www.bungie.net/en/OAuth/Authorize";
+        var OauthKey = "35277";
+
+        function clear() {
+
+            document.getElementById("Name-in").value = "";
+
+        };
+
+        function getInfo() {
+
+            var Plat = document.getElementById("Plat-in").value;
+            var Name = document.getElementById("Name-in").value;
+
+            if(Name = "Select") {
+                console.log("Select A Platform")
+            }
+            else {
+                console.log(Plat + ", " + Name);
+            }
+
+            clear();
+
+        };
         
     </script>
 
