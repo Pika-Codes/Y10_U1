@@ -20,7 +20,7 @@
             <li><a href="prRaidsV.html">Raids</a></li>
             <li><a href="prDungeonsV.html">Dungeons</a></li>
             <li class="divider"></li>
-            <li><a href="prPlaceholder.html">(Api Page)</a></li>
+            <li><a href="prAPI.html">(Api Page)</a></li>
         </ul>
         <nav>
             <div class="nav-wrapper">
@@ -28,7 +28,7 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="prRaidsU.html">Raids</a></li>
                 <li><a href="prDungeonsU.html">Dungeons</a></li>
-                <li><a href="prPlaceholder.html">(Api Page)</a></li>
+                <li><a href="prAPI.html">(Api Page)</a></li>
                 <li><a class="dropdown-trigger" data-target="dropdown1">Vaulted<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
             </div>
@@ -38,15 +38,21 @@
 
         <h1>Vaulted Raids</h1>
 
+        <div class="parallax-R"></div>
+
     </body>
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type = "text/javascript">
 
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
             console.log("Got here");
             $(".dropdown-trigger").dropdown();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.parallax');
+            var instances = M.Parallax.init(elems, 0);
         });
         
     </script>
