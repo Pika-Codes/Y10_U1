@@ -74,19 +74,26 @@
         function clear() {
 
             document.getElementById("Name-in").value = "";
+            document.getElementById("Plat-in").value = "Select";
 
         };
 
         function getInfo() {
 
-            var Plat = document.getElementById("Plat-in").value;
             var Name = document.getElementById("Name-in").value;
+            var Plat = document.getElementById("Plat-in").value;
 
-            if(Name = "Select") {
-                console.log("Select A Platform")
+            console.log(Name)
+            console.log(Plat)
+
+            if(Plat == "Select") {
+                alert("Select A Platform")
+            }
+            else if(Name == "") {
+                alert("Enter Your Gamertag/PSN")
             }
             else {
-                console.log(Plat + ", " + Name);
+                alert("You Are " + Name + ", on " + Plat)
             }
 
             clear();
