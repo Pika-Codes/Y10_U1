@@ -23,7 +23,7 @@
         </ul>
         <nav>
             <div class="nav-wrapper">
-            <a href="prMain.html" class="brand-logo">OnlineSherpa</a>
+            <a href="Index.html" class="brand-logo">OnlineSherpa</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="prRaidsU.html">Raids</a></li>
                 <li><a href="prDungeonsU.html">Dungeons</a></li>
@@ -52,6 +52,8 @@
 
         <button onclick="getItem()" class="btn-floating">Test</button>
 
+        <button onclick="Oauth()" class="btn-floating">Oauth</button>
+
         <div class="parallax-A"></div>
         
     </body>
@@ -75,6 +77,22 @@
         var OauthKey = "35277";
         var xhr = new XMLHttpRequest();
 
+        function Oauth() {
+
+            var Oauth = xhr.open("GET", OauthURL + "?client_id=" + OauthKey +"&response_type=code");
+            xhr.setRequestHeader("X-API-Key", apiKey);
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    var json = JSON.parse(this.responseText);
+                    console.log(json.Response.data);
+                } 
+            }
+
+            xhr.send()
+
+        };
+
         function clear() {
 
             document.getElementById("Name-in").value = "";
@@ -82,20 +100,19 @@
 
         };
 
-        async function callGetInfo() {
+        async function getInfo() {
 
-            await getInfo()
+            await h()
 
         }
 
-        async function getInfo() {
+        async function h() {
 
             var Plat = document.getElementById("Plat-in").value;
             var Name = document.getElementById("Name-in").value;
 
             console.log(Name)
             
-            var xhr = new XMLHttpRequest();
             xhr.open("GET", endPoint + "/Destiny2/SearchDestinyPlayer/any/" + Name + "/");
             xhr.setRequestHeader("X-API-Key", apiKey);
 
@@ -114,20 +131,20 @@
 
         async function getItem() {
 
-            await reqOpen();
-            await reqLog();
-            await reqSend();
+            await testOpen();
+            await testLog();
+            await testSend();
             
         };
 
-        async function reqOpen() {
+        async function testOpen() {
 
             xhr.open("GET", endPoint + "/Destiny/Manifest/InventoryItem/1274330687/", true);
             xhr.setRequestHeader("X-API-Key", apiKey);  
 
         };
 
-        async function reqLog() {
+        async function testLog() {
 
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
@@ -138,7 +155,7 @@
 
         };
 
-        async function reqSend() {
+        async function testSend() {
 
             xhr.send();
 
