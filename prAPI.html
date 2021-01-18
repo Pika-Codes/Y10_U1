@@ -48,7 +48,7 @@
         <label for="input">Enter Gamertag/PSN:</label>
         <input id="Name-in">
 
-        <button onclick="callGetInfo()" class="btn-floating">Submit</button>
+        <button onclick="getInfo()" class="btn-floating">Submit</button>
 
         <button onclick="getItem()" class="btn-floating">Test</button>
 
@@ -70,6 +70,13 @@
             var elems = document.querySelectorAll('.parallax');
             var instances = M.Parallax.init(elems, 0);
         });
+
+        function clear() {
+
+            document.getElementById("Name-in").value = "";
+            document.getElementById("Plat-in").value = "Select";
+
+        };
 
         var endPoint = "https://www.bungie.net/Platform"
         var apiKey = "05e3ca94078a4f90a6ced1a0bca23812";
@@ -93,41 +100,43 @@
 
         };
 
-        function clear() {
-
-            document.getElementById("Name-in").value = "";
-            document.getElementById("Plat-in").value = "Select";
-
-        };
-
         async function getInfo() {
 
-            await h()
+            await getOpen();
+            await getLog();
+            await getSend();
 
         }
 
-        async function h() {
+        async function getOpen() {
 
             var Plat = document.getElementById("Plat-in").value;
             var Name = document.getElementById("Name-in").value;
 
             console.log(Name)
             
-            xhr.open("GET", endPoint + "/Destiny2/SearchDestinyPlayer/any/" + Name + "/");
+            xhr.open("GET", endPoint + "/Destiny2/SearchDestinyPlayer/4/" + Name + "/");
             xhr.setRequestHeader("X-API-Key", apiKey);
+
+        };
+
+        async function getLog() {
 
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var json = JSON.parse(this.responseText);
                     console.log(json.Response.data);
-                } 
-            }
+                }; 
+            };
+        };
+
+        async function getSend() {
 
             xhr.send();
 
             clear();
 
-        };
+        }
 
         async function getItem() {
 
