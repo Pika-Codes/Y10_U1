@@ -48,7 +48,9 @@
         <label for="input">Enter Gamertag/PSN:</label>
         <input id="Name-in">
 
-        <button onclick="getInfo()" class="btn-floating">Submit</button>
+        <button onclick="callGetInfo()" class="btn-floating">Submit</button>
+
+        <button onclick="getItem()" class="btn-floating">Test</button>
 
         <div class="parallax-A"></div>
         
@@ -67,10 +69,11 @@
             var instances = M.Parallax.init(elems, 0);
         });
 
-        var Endpoint = "https://www.bungie.net/Platform"
-        var APIkey = "05e3ca94078a4f90a6ced1a0bca23812";
+        var endPoint = "https://www.bungie.net/Platform"
+        var apiKey = "05e3ca94078a4f90a6ced1a0bca23812";
         var OauthURL = "https://www.bungie.net/en/OAuth/Authorize";
         var OauthKey = "35277";
+        var xhr = new XMLHttpRequest();
 
         function clear() {
 
@@ -79,28 +82,68 @@
 
         };
 
-        function getInfo() {
+        async function callGetInfo() {
 
-            var Name = document.getElementById("Name-in").value;
+            await getInfo()
+
+        }
+
+        async function getInfo() {
+
             var Plat = document.getElementById("Plat-in").value;
+            var Name = document.getElementById("Name-in").value;
 
             console.log(Name)
-            console.log(Plat)
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", endPoint + "/Destiny2/SearchDestinyPlayer/any/" + Name + "/");
+            xhr.setRequestHeader("X-API-Key", apiKey);
 
-            if(Plat == "Select") {
-                alert("Select A Platform")
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    var json = JSON.parse(this.responseText);
+                    console.log(json.Response.data);
+                } 
             }
-            else if(Name == "") {
-                alert("Enter Your Gamertag/PSN")
-            }
-            else {
-                alert("You Are " + Name + ", on " + Plat)
-            }
+
+            xhr.send();
 
             clear();
 
         };
-        
+
+        async function getItem() {
+
+            await reqOpen();
+            await reqLog();
+            await reqSend();
+            
+        };
+
+        async function reqOpen() {
+
+            xhr.open("GET", endPoint + "/Destiny/Manifest/InventoryItem/1274330687/", true);
+            xhr.setRequestHeader("X-API-Key", apiKey);  
+
+        };
+
+        async function reqLog() {
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    var json = JSON.parse(this.responseText);
+                    console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
+                };
+            };
+
+        };
+
+        async function reqSend() {
+
+            xhr.send();
+
+        };
+  
     </script>
 
 </html>
