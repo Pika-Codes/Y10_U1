@@ -108,6 +108,7 @@
             await getOpen();
             await getLog();
             await getSend();
+            //await
 
         }
 
@@ -127,9 +128,10 @@
 
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
-                    response = JSON.parse(this.responseText);
-                    console.log(response);
-                    console.log(response.Response[0].displayName)
+                    var response = JSON.parse(this.responseText);
+                    console.log(response.Response[0].membershipId);
+                    var memberId = response.Response[0].membershipId;
+                    charOpen(memberId);
                 }; 
             };
         };
@@ -140,7 +142,36 @@
 
             clear();
 
-        }
+        };
+
+        function charOpen(memberId) {
+
+            xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "?components=205");
+            xhr.setRequestHeader("X-API-Key", apiKey);
+
+            charLog();
+
+        };
+
+        function charLog() {
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    var response = JSON.parse(this.responseText);
+                    console.log(response);
+                    //console.log();
+                }; 
+            };
+
+            charSend();
+
+        };
+
+        function charSend() {
+
+            xhr.send();
+
+        };
 
         async function getItem() {
 
@@ -177,16 +208,3 @@
     </script>
 
 </html>
-
-{"Response":
-[{"iconPath":"/img/theme/bungienet/icons/psnLogo.png",
-"crossSaveOverride":0,
-"isPublic":false,
-"membershipType":3,
-"membershipId":"4611686018492887422",
-"displayName":"Pika"}],
-"ErrorCode":1,
-"ThrottleSeconds":0,
-"ErrorStatus":"Success",
-"Message":"Ok",
-"MessageData":{}}
