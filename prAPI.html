@@ -40,9 +40,12 @@
         <label for="select">Select your platform:</label>
         <select name="Platform", id="Plat-in">
             <option value="Select">Select A Platform</option>
-            <option value="Steam">Steam</option>
-            <option value="XBox">XBox</option>
-            <option value="PlayStation">PlayStation</option>
+            <option value="-1">All</option>
+            <option value="1">XBox</option>
+            <option value="2">PlayStation</option>
+            <option value="3">Steam</option>
+            <option value="4">Blizzard</option>
+            <option value="5">Stadia</option>
         </select>
         <br>
         <label for="input">Enter Gamertag/PSN:</label>
@@ -115,7 +118,7 @@
 
             console.log(Name)
             
-            xhr.open("GET", endPoint + "/Destiny2/SearchDestinyPlayer/4/" + Name + "/");
+            xhr.open("GET", endPoint + "/Destiny2/SearchDestinyPlayer/-1/" + Name + "/");
             xhr.setRequestHeader("X-API-Key", apiKey);
 
         };
@@ -124,8 +127,9 @@
 
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
-                    var json = JSON.parse(this.responseText);
-                    console.log(json.Response.data);
+                    response = JSON.parse(this.responseText);
+                    console.log(response);
+                    console.log(response.Response[0].displayName)
                 }; 
             };
         };
@@ -173,3 +177,16 @@
     </script>
 
 </html>
+
+{"Response":
+[{"iconPath":"/img/theme/bungienet/icons/psnLogo.png",
+"crossSaveOverride":0,
+"isPublic":false,
+"membershipType":3,
+"membershipId":"4611686018492887422",
+"displayName":"Pika"}],
+"ErrorCode":1,
+"ThrottleSeconds":0,
+"ErrorStatus":"Success",
+"Message":"Ok",
+"MessageData":{}}
