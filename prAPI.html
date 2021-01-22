@@ -51,9 +51,9 @@
         <label for="input">Enter Gamertag/PSN:</label>
         <input id="Name-in">
 
-        <button onclick="getInfo()" class="btn-floating">Submit</button>
+        <button onclick="doGet()" class="btn-floating">Submit</button>
 
-        <button onclick="getItem()" class="btn-floating">Test</button>
+        <button onclick="doTest()" class="btn-floating">Test</button>
 
         <button onclick="Oauth()" class="btn-floating">Oauth</button>
 
@@ -103,7 +103,7 @@
 
         };
 
-        async function getInfo() {
+        async function doGet() {
 
             await getOpen();
             await getLog();
@@ -130,7 +130,7 @@
                     var response = JSON.parse(this.responseText);
                     console.log(response.Response[0].membershipId);
                     var memberId = response.Response[0].membershipId;
-                    charOpen(memberId);
+                    doChar(memberId);
                 }; 
             };
         };
@@ -143,47 +143,54 @@
 
         };
 
-        function charOpen(memberId) {
+        async function doChar(memberId) {
+
+            await charOpen(memberId);
+            await charLog(memberId);
+            await charSend();
+
+        }
+
+        async function charOpen(memberId) {
 
             xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "?components=205");
             xhr.setRequestHeader("X-API-Key", apiKey);
 
-            charLog(memberId);
-
         };
 
-        function charLog(memberId) {
+        async function charLog(memberId) {
 
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var response = JSON.parse(this.responseText);
-                    console.log(response.Response);
                     var slot1 = response.Response.characterEquipment.data[Object.keys(response.Response.characterEquipment.data)[0]].items[0].itemInstanceId;
                     var slot2 = response.Response.characterEquipment.data[Object.keys(response.Response.characterEquipment.data)[0]].items[1].itemInstanceId;
                     var slot3 = response.Response.characterEquipment.data[Object.keys(response.Response.characterEquipment.data)[0]].items[2].itemInstanceId;
-                    wep1Open(memberId, slot1);
+                    doWep1(memberId, slot1);
                     //wep2Open(memberId, slot2);
                     //wep3Open(memberId, slot3);
                 }; 
             };
-
-            charSend();
-
         };
 
-        function charSend() {
+        async function charSend() {
 
             xhr.send();
 
         };
 
+        async function doWep1(memberId, slot1) {
+
+            await wep1Open(memberId, slot1);
+            await wep1Log();
+            await wep1Send();
+
+        };
+
         function wep1Open(memberId, slot1) {
 
-            xhr.open("GET", endPoint + "/Destiny2/-1/Profile/" + memberId + "/Item/" + slot1);
+            xhr.open("GET", endPoint + "/Destiny2/" + "3" + "/Profile/" + memberId + "/Item/" + slot1 + "/?components=307");
             xhr.setRequestHeader("X-API-Key", apiKey);
-            console.log(slot1)
-
-            wep1Log();
 
         };
 
@@ -192,12 +199,10 @@
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var response = JSON.parse(this.responseText);
-                    console.log(response);
+                    var hash1 = response.Response.item.data.itemHash
+                    doDef1(hash1);
                 }; 
             };
-
-            wep1Send();
-
         };
 
         function wep1Send() {
@@ -206,7 +211,7 @@
 
         };
 
-        /*function wep2Open(memberId, slot2) {
+        /*async function wep2Open(memberId, slot2) {
 
             xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "Item/" + slot2);
             xhr.setRequestHeader("X-API-Key", apiKey);
@@ -214,7 +219,7 @@
 
         };*/
 
-       /* function wep3Open(memberId, slot3) {
+       /*async function wep3Open(memberId, slot3) {
 
             xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "Item/" + slot3);
             xhr.setRequestHeader("X-API-Key", apiKey);
@@ -222,7 +227,38 @@
 
         };*/
 
-        async function getItem() {
+        async function doDef1(hash1) {
+
+            await def1Open(hash1);
+            await def1Log();
+            await def1Send();
+
+        };
+
+        function def1Open(hash1) {
+
+            xhr.open("GET", endPoint + "/Destiny2/Manifest/DestinyInventoryItemDefinition/" + hash1 + "/");
+            xhr.setRequestHeader("X-API-Key", apiKey);
+
+        };
+
+        function def1Log() {
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    var response = JSON.parse(this.responseText);
+                    console.log(response.Response.displayProperties);
+                }; 
+            };
+        };
+
+        function def1Send() {
+
+            xhr.send();
+
+        };
+
+        async function doTest() {
 
             await testOpen();
             await testLog();
