@@ -108,7 +108,6 @@
             await getOpen();
             await getLog();
             await getSend();
-            //await
 
         }
 
@@ -149,17 +148,22 @@
             xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "?components=205");
             xhr.setRequestHeader("X-API-Key", apiKey);
 
-            charLog();
+            charLog(memberId);
 
         };
 
-        function charLog() {
+        function charLog(memberId) {
 
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var response = JSON.parse(this.responseText);
-                    console.log(response);
-                    //console.log();
+                    console.log(response.Response);
+                    var slot1 = response.Response.characterEquipment.data[Object.keys(response.Response.characterEquipment.data)[0]].items[0].itemInstanceId;
+                    var slot2 = response.Response.characterEquipment.data[Object.keys(response.Response.characterEquipment.data)[0]].items[1].itemInstanceId;
+                    var slot3 = response.Response.characterEquipment.data[Object.keys(response.Response.characterEquipment.data)[0]].items[2].itemInstanceId;
+                    wep1Open(memberId, slot1);
+                    //wep2Open(memberId, slot2);
+                    //wep3Open(memberId, slot3);
                 }; 
             };
 
@@ -172,6 +176,51 @@
             xhr.send();
 
         };
+
+        function wep1Open(memberId, slot1) {
+
+            xhr.open("GET", endPoint + "/Destiny2/-1/Profile/" + memberId + "/Item/" + slot1);
+            xhr.setRequestHeader("X-API-Key", apiKey);
+            console.log(slot1)
+
+            wep1Log();
+
+        };
+
+        function wep1Log() {
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    var response = JSON.parse(this.responseText);
+                    console.log(response);
+                }; 
+            };
+
+            wep1Send();
+
+        };
+
+        function wep1Send() {
+
+            xhr.send();
+
+        };
+
+        /*function wep2Open(memberId, slot2) {
+
+            xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "Item/" + slot2);
+            xhr.setRequestHeader("X-API-Key", apiKey);
+            console.log(memberId, slot2);
+
+        };*/
+
+       /* function wep3Open(memberId, slot3) {
+
+            xhr.open("GET", endPoint + "/Destiny2/3/Profile/" + memberId + "Item/" + slot3);
+            xhr.setRequestHeader("X-API-Key", apiKey);
+            console.log(memberId, slot3);
+
+        };*/
 
         async function getItem() {
 
