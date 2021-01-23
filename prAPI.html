@@ -53,13 +53,19 @@
 
         <button onclick="doGet()" class="btn-floating">Submit</button>
 
-        <button onclick="doTest()" class="btn-floating">Test</button>
+        <button onclick="doEval()" class="btn-floating">Evaluate</button>
 
-        <button onclick="Oauth()" class="btn-floating">Oauth</button>
+        <button onclick="clearWeps()" class="btn-floating">Clear</button>
 
-        <div id="wep1Place"></div>
-        <div id="wep2Place"></div>
-        <div id="wep3Place"></div>
+        <div id="wep1Img"></div>
+        <div id="wep1Name"></div>
+        <div id="wep1Eval"></div>
+        <div id="wep2Img"></div>
+        <div id="wep2Name"></div>
+        <div id="wep2Eval"></div>
+        <div id="wep3Img"></div>
+        <div id="wep3Name"></div>
+        <div id="wep3Eval"></div>
 
         <div class="parallax-A"></div>
         
@@ -87,6 +93,20 @@
 
         };
 
+        function clearWeps() {
+
+            var name = document.getElementById("wep1Img").innerHTML = "";
+            var name = document.getElementById("wep1Name").innerHTML = "";
+            var name = document.getElementById("wep1Eval").innerHTML = "";
+            var name = document.getElementById("wep2Img").innerHTML = "";
+            var name = document.getElementById("wep2Name").innerHTML = "";
+            var name = document.getElementById("wep2Eval").innerHTML = "";
+            var name = document.getElementById("wep3Img").innerHTML = "";
+            var name = document.getElementById("wep3Name").innerHTML = "";
+            var name = document.getElementById("wep3Eval").innerHTML = "";
+
+        };
+
         var endPoint = "https://www.bungie.net/Platform"
         var apiKey = "05e3ca94078a4f90a6ced1a0bca23812";
         var OauthURL = "https://www.bungie.net/en/OAuth/Authorize";
@@ -111,6 +131,7 @@
 
         async function doGet() {
 
+            clearWeps();
             await getOpen();
             await getLog();
             await getSend();
@@ -185,11 +206,11 @@
             await wep1Open(memberId, slot1);
             await wep1Log();
             await wep1Send();
-            await sleep(1000);
+            await sleep(1200);
             await wep2Open(memberId, slot2);
             await wep2Log();
             await wep2Send();
-            await sleep(1000);
+            await sleep(1200);
             await wep3Open(memberId, slot3);
             await wep3Log();
             await wep3Send();
@@ -212,7 +233,7 @@
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var response = JSON.parse(this.responseText);
-                    document.getElementById("wep1Place").innerHTML = response.Response.item.data.itemHash;
+                    document.getElementById("wep1Name").innerHTML = response.Response.item.data.itemHash;
                 }; 
             };
         };
@@ -237,7 +258,7 @@
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var response = JSON.parse(this.responseText);
-                    document.getElementById("wep2Place").innerHTML = response.Response.item.data.itemHash;
+                    document.getElementById("wep2Name").innerHTML = response.Response.item.data.itemHash;
                 }; 
             };
         };
@@ -262,7 +283,7 @@
             xhr.onreadystatechange = function() {
                 if(this.readyState === 4 && this.status === 200) {
                     var response = JSON.parse(this.responseText);
-                    document.getElementById("wep3Place").innerHTML = response.Response.item.data.itemHash;
+                    document.getElementById("wep3Name").innerHTML = response.Response.item.data.itemHash;
                 }; 
             };
         };
@@ -278,11 +299,11 @@
             await def1Open();
             await def1Log();
             await def1Send();
-            await sleep(1000)
+            await sleep(1200)
             await def2Open();
             await def2Log();
             await def2Send();
-            await sleep(1000)
+            await sleep(1200)
             await def3Open();
             await def3Log();
             await def3Send();
@@ -291,7 +312,7 @@
 
         async function def1Open() {
 
-            var hash1 = document.getElementById("wep1Place").innerHTML;
+            var hash1 = document.getElementById("wep1Name").innerHTML;
 
             xhr.open("GET", endPoint + "/Destiny2/Manifest/DestinyInventoryItemDefinition/" + hash1 + "/");
             xhr.setRequestHeader("X-API-Key", apiKey);
@@ -305,7 +326,8 @@
                     var response = JSON.parse(this.responseText);
                     var name = response.Response.displayProperties.name;
                     var img = imgBase + response.Response.displayProperties.icon;
-                    document.getElementById("wep1Place").innerHTML = "<img src = " + img + "><p>" + name + "</p>";
+                    document.getElementById("wep1Img").innerHTML = "<img src = " + img + ">";
+                    document.getElementById("wep1Name").innerHTML = name;
                 }; 
             };
         };
@@ -318,7 +340,7 @@
 
         async function def2Open() {
 
-            var hash2 = document.getElementById("wep2Place").innerHTML;
+            var hash2 = document.getElementById("wep2Name").innerHTML;
 
             xhr.open("GET", endPoint + "/Destiny2/Manifest/DestinyInventoryItemDefinition/" + hash2 + "/");
             xhr.setRequestHeader("X-API-Key", apiKey);
@@ -332,7 +354,8 @@
                     var response = JSON.parse(this.responseText);
                     var name = response.Response.displayProperties.name;
                     var img = imgBase + response.Response.displayProperties.icon;
-                    document.getElementById("wep2Place").innerHTML = "<img src = " + img + "><p>" + name + "</p>";
+                    document.getElementById("wep2Img").innerHTML = "<img src = " + img + ">";
+                    document.getElementById("wep2Name").innerHTML = name;
                 }; 
             };
         };
@@ -345,7 +368,7 @@
 
         async function def3Open() {
 
-            var hash3 = document.getElementById("wep3Place").innerHTML;
+            var hash3 = document.getElementById("wep3Name").innerHTML;
 
             xhr.open("GET", endPoint + "/Destiny2/Manifest/DestinyInventoryItemDefinition/" + hash3 + "/");
             xhr.setRequestHeader("X-API-Key", apiKey);
@@ -359,7 +382,8 @@
                     var response = JSON.parse(this.responseText);
                     var name = response.Response.displayProperties.name;
                     var img = imgBase + response.Response.displayProperties.icon;
-                    document.getElementById("wep3Place").innerHTML = "<img src = " + img + "><p>" + name + "</p>";
+                    document.getElementById("wep3Img").innerHTML = "<img src = " + img + ">";
+                    document.getElementById("wep3Name").innerHTML = name;
                 }; 
             };
         };
@@ -372,36 +396,72 @@
 
         };
 
-        async function doTest() {
+        async function doEval() {
 
-            await testOpen();
-            await testLog();
-            await testSend();
-            
-        };
-
-        async function testOpen() {
-
-            xhr.open("GET", endPoint + "/Destiny/Manifest/InventoryItem/1274330687/", true);
-            xhr.setRequestHeader("X-API-Key", apiKey);  
+            await eval1();
+            await eval2();
+            await eval3();
 
         };
 
-        async function testLog() {
+        function eval1() {
 
-            xhr.onreadystatechange = function() {
-                if(this.readyState === 4 && this.status === 200) {
-                    var json = JSON.parse(this.responseText);
-                    console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
-                };
+            var name = document.getElementById("wep1Name").innerHTML;
+
+            if(name == "Escape Velocity") {
+                document.getElementById("wep1Eval").innerHTML = "Good for add clear, use in PoH, Proph, and DSC except final encounter";
+            }
+            else if(name == "Heritage") {
+                document.getElementById("wep1Eval").innerHTML = "Amazing for yellow/orange bars close-up, but a sniper can be better because of the range. Use in combo with Anarchy and FILO in final boss for DSC";
+            }
+            else {
+                document.getElementById("wep1Eval").innerHTML = "There are obviously better options, but if it works, it works";
             };
-
         };
 
-        async function testSend() {
+        function eval2() {
 
-            xhr.send();
+            var name = document.getElementById("wep2Name").innerHTML;
 
+            if(name == "Truthteller") {
+                document.getElementById("wep2Eval").innerHTML = "Good for yellow/orange bars, use in Proph especially in boss and cube, PoH, but shotguns are better for it, and DSC, but not for boss because of damage or first encounter because of the confined space";
+            }
+            else if(name == "First In, Last Out") {
+                document.getElementById("wep2Eval").innerHTML = "Amazing for yellow/orange bars close-up, but Truthteller or a sniper can be better because of the range. Use in combo with Anarchy and Heritage in final boss for DSC";
+            }
+            else if(name == "Cloudstrike") {
+                document.getElementById("wep2Eval").innerHTML = "Great for boss damage, espesically final boss in DSC, but not much good elsewhere, but could be used in final Proph boss"
+            }
+            else if(name == "IKELOS_SMG_v1.0.2") {
+                document.getElementById("wep2Eval").innerHTML = "One of the best add clear weapons, especially with it's ability to easaly make warmind cells"
+            }
+            else {
+                document.getElementById("wep2Eval").innerHTML = "There are obviously better options, but if it works, it works";
+            };
+        };
+
+        function eval3() {
+
+            var name = document.getElementById("wep3Name").innerHTML;
+
+            if(name == "The Lament") {
+                document.getElementById("wep3Eval").innerHTML = "Amazing for single-target DPS, use for the entirety of PoH, first encounter Proph, and Atraks in DSC"
+            }
+            else if(name == "Falling Guillotine") {
+                document.getElementById("wep3Eval").innerHTML = "Great for single-target DPS or tight-space add clear, use throughout PoH or first encounter Proph, but not in DSC because of Atraks' short damage window"
+            }
+            else if(name == "Xenophage") {
+                document.getElementById("wep3Eval").innerHTML = "One of the best DPS weapons, use in Poh 3rd encounter (curse of suffering room), and Proph cube encounter. Amazing against Taniks, but even more so when combined with 2 shotguns, even without tripple swapping"
+            }
+            else if(name == "Anarchy") {
+                document.getElementById("wep3Eval").innerHTML = "One of the best possible heavy choices, and an amazing DPS suppliment for slug shotguns or snipers. It's also good for add clear agaist spawn areas"
+            }
+            else if(name == "Eyes of Tomorrow") {
+                document.getElementById("wep3Eval").innerHTML = "A slightly dissapointing weapon because of the damage reduction against bosses, but it works very well against Atraks and the 4th PoH encounter (the 3 witches)"
+            }
+            else {
+                document.getElementById("wep3Eval").innerHTML = "Since heavy weapons are usually the main DPS output, consider using something else here"
+            };
         };
         
     </script>
