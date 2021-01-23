@@ -2844,7 +2844,7 @@ video.responsive-video {
 }
 
 .parallax-A {
-  background-image: url();
+  background-image: url(raidBanner.jpg);
   background-color: #ffcb9a;
   height: 570px;
   background-attachment: fixed;
